@@ -22,18 +22,32 @@ function gifCreator(cartoonGif){
 		method : "GET"
 	}).done(function(response){
 		for(var i =0; i < 8; i++){
+			console.log(response);
 			var rating = response.data[i].rating;
 			var ratingDisplay = $("<p>").text("Rating: " + rating);
 			var b = $("<img>");
 			b.addClass("gifResult");
 			b.attr("src", response.data[i].images.downsized.url);
+			b.attr("state", "false");
+			b.attr("count", i);
 			var c = $("<div>");
 			c.addClass("rowDiv");
 			c.append(b);
 			c.append(ratingDisplay)
 			$("#cartoonsGif").append(c);
 		}
+    $("body").on("click", '.gifResult', function(){
 
+        //Change the image src attribute so we can make the gif animated or static depending on the previous state.
+        if($(this).attr("state") === 'false'){
+            $(this).attr("src", response.data[$(this).attr("count")].images.downsized.url);
+            $(this).attr("state", "true");
+        }
+        else{
+            $(this).attr("src", response.data[$(this).attr("count")].images.fixed_height_still.url);
+            $(this).attr("state", "true");
+        }
+    });	
 
 	})
 };
