@@ -14,6 +14,7 @@ $("#addCartoon").click(function(event){
 
 
 renderButtons();
+
 function gifCreator(cartoonGif){
 	$("#cartoonsGif").empty();
 	var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + cartoonGif + "&offset=" + randomNumber() + "&api_key=U62sFuIW53IcX3v7NrHAWTKp1gLSZPfx&&limit=10";
@@ -22,7 +23,6 @@ function gifCreator(cartoonGif){
 		method : "GET"
 	}).done(function(response){
 		for(var i =0; i < 8; i++){
-			console.log(response);
 			var rating = response.data[i].rating;
 			var ratingDisplay = $("<p>").text("Rating: " + rating);
 			var b = $("<img>");
@@ -38,14 +38,13 @@ function gifCreator(cartoonGif){
 		}
     $("body").on("click", '.gifResult', function(){
 
-        //Change the image src attribute so we can make the gif animated or static depending on the previous state.
         if($(this).attr("state") === 'false'){
             $(this).attr("src", response.data[$(this).attr("count")].images.downsized.url);
             $(this).attr("state", "true");
         }
         else{
             $(this).attr("src", response.data[$(this).attr("count")].images.fixed_height_still.url);
-            $(this).attr("state", "true");
+            $(this).attr("state", "false");
         }
     });	
 
@@ -68,7 +67,7 @@ function renderButtons(){
 };
 
 function randomNumber() {
-	return Math.floor((Math.random() * 25) + 1);
+	return Math.floor((Math.random() * 30) + 1);
 }
 
 });
