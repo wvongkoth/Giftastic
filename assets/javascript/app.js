@@ -17,18 +17,20 @@ renderButtons();
 function gifCreator(cartoonGif){
 	$("#cartoonsGif").empty();
 	var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=U62sFuIW53IcX3v7NrHAWTKp1gLSZPfx&q=" + cartoonGif + "&limit=25&offset=0&rating=G&lang=en";
-	console.log("hello" + cartoonGif);
 	$.ajax({
 		url : queryURL,
 		method : "GET"
 	}).done(function(response){
 		console.log(response.data.length);
-		for(var i =0; i < 4; i++){
-			Math.floor(Math.random() * 23 + 1);	//insert math random here to generate random gifs
+		for(var i =0; i < 8; i++){
+		//insert math random here to generate random gifs
+		var rating = response.data[i].rating;
+		var ratingDisplay = $("<p>").text("Rating: " + rating);
 		var b = $("<img>");
 		b.addClass("gifResult");
 		b.attr("src", response.data[i].images.downsized.url);
 		$("#cartoonsGif").append(b);
+		$("#cartoonsGif").append(ratingDisplay);
 	}
 
 	})

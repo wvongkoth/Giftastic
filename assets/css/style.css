@@ -1,8 +1,16 @@
 body {
 	background-color: tan;
+	padding: 20px;
+	font-size: 15px;
+	color: blue;
 }
 
 img {
 	height: 300px;
 	width: 300px;
+}
+
+button {
+	color: red;
+	font-size: 15px;
 }
