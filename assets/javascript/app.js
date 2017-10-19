@@ -24,6 +24,7 @@ function gifCreator(cartoonGif){
 	}).done(function(response){
 		console.log(response.data.length);
 		for(var i =0; i < 4; i++){
+			Math.floor(Math.random() * 23 + 1);	//insert math random here to generate random gifs
 		var b = $("<img>");
 		b.addClass("gifResult");
 		b.attr("src", response.data[i].images.downsized.url);
