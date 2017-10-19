@@ -22,16 +22,21 @@ function gifCreator(cartoonGif){
 		method : "GET"
 	}).done(function(response){
 		console.log(response.data.length);
+		console.log(response);
 		for(var i =0; i < 8; i++){
 		//insert math random here to generate random gifs
-		var rating = response.data[i].rating;
-		var ratingDisplay = $("<p>").text("Rating: " + rating);
-		var b = $("<img>");
-		b.addClass("gifResult");
-		b.attr("src", response.data[i].images.downsized.url);
-		$("#cartoonsGif").append(b);
-		$("#cartoonsGif").append(ratingDisplay);
-	}
+			var rating = response.data[i].rating;
+			var ratingDisplay = $("<p>").text("Rating: " + rating);
+			var b = $("<img>");
+			b.addClass("gifResult");
+			b.attr("src", response.data[i].images.downsized.url);
+			var c = $("<div>");
+			c.addClass("rowDiv");
+			c.append(b);
+			c.append(ratingDisplay)
+			$("#cartoonsGif").append(c);
+		}
+
 
 	})
 };
