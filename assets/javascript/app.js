@@ -16,15 +16,12 @@ $("#addCartoon").click(function(event){
 renderButtons();
 function gifCreator(cartoonGif){
 	$("#cartoonsGif").empty();
-	var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=U62sFuIW53IcX3v7NrHAWTKp1gLSZPfx&q=" + cartoonGif + "&limit=25&offset=0&rating=G&lang=en";
+	var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + cartoonGif + "&offset=" + randomNumber() + "&api_key=U62sFuIW53IcX3v7NrHAWTKp1gLSZPfx&&limit=10";
 	$.ajax({
 		url : queryURL,
 		method : "GET"
 	}).done(function(response){
-		console.log(response.data.length);
-		console.log(response);
 		for(var i =0; i < 8; i++){
-		//insert math random here to generate random gifs
 			var rating = response.data[i].rating;
 			var ratingDisplay = $("<p>").text("Rating: " + rating);
 			var b = $("<img>");
@@ -55,5 +52,9 @@ function renderButtons(){
 			$("#cartoonButtons").append(a);
 		}
 };
+
+function randomNumber() {
+	return Math.floor((Math.random() * 25) + 1);
+}
 
 });
